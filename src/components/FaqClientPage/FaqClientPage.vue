@@ -8,17 +8,10 @@
 		<div class="main">
 			<ColumnNavigation :style="Style" />
 			<!-- <div>scenario:</div> -->
-			<!-- <VerticalNavigation
-        v-if="sections.scenario.length > 0"
-        :navigationStore="navigationStore"
-        :range="sections.scenario"
-      />
-      <div>result:</div>
-      <VerticalNavigation
-        v-if="sections.result.length > 0"
-        :navigationStore="navigationStore"
-        :range="sections.result"
-			/>-->
+			<!-- <VerticalNavigation v-if="sections.scenario" :range="sections.scenario" />
+			{{sections.scenario}}
+			<div>result:</div> -->
+			<!-- <VerticalNavigation v-if="sections.result" :range="sections.result" /> -->
 			<!-- <div style="height: 1024px">dammy</div> -->
 		</div>
 	</div>
@@ -26,13 +19,15 @@
 
 <script lang="ts">
 // import FaqClientMixin from '../mixins/FaqClientMixin';
-// import { getViewSections } from '../common/resourceNavigationUtil';
+import { getViewSections } from "./resourceNavigationUtil";
 import * as scrollUtil from "./scrollUtil";
 import ColumnNavigation from "./ColumnNavigation.vue";
+import VerticalNavigation from "./VerticalNavigation.vue";
 import { Watch } from "vue-property-decorator";
 import { Component, Vue, Prop } from "vue-property-decorator";
+import { navigationStoreModule } from "./store/navigationStore";
 @Component({
-	components: { ColumnNavigation }
+	components: { ColumnNavigation, VerticalNavigation }
 })
 export default class FaqClientPage extends Vue {
 	@Prop()
@@ -43,9 +38,9 @@ export default class FaqClientPage extends Vue {
 		};
 	}
 	get sections() {
-		return { talkScript: [] }; //getViewSections(this.navigationStore.state.routes);
+		return getViewSections(navigationStoreModule.Routes);
 	}
-	@Watch("navigationStore.state.routes")
+	@Watch("navigationStoreModule.Routes")
 	onRouteChanged() {
 		this.$nextTick(() => {
 			const target = document.querySelector(".active");

@@ -12,13 +12,16 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { navigationStoreModule } from "./FaqClientPage/store/navigationStore";
 import FaqClientPage from "./FaqClientPage/FaqClientPage.vue";
 import ResourceList from "./FaqClientPage/columns/ResourceList.vue";
+import { DataResource } from "./FaqClientPage/dataResource";
+import { getViewSections } from "./FaqClientPage/resourceNavigationUtil";
 @Component({
 	components: { FaqClientPage, ResourceList }
 	// components: { TaggedInput, ColumnNavigation, VerticalNavigation, Breadcrumbs },
 })
 export default class Wrapper extends Vue {
+	dataResource: DataResource = new DataResource();
 	get sections() {
-		return []; //getViewSections(this.navigationStore.state.routes);
+		return getViewSections(navigationStoreModule.Route);
 	}
 	isReady: boolean = false;
 	@Prop()
@@ -27,7 +30,7 @@ export default class Wrapper extends Vue {
 	eventHub: any;
 	@Prop()
 	height: any;
-	@Watch("navigationStoreModule.routes")
+	@Watch("navigationStoreModule.Routes")
 	onRouteChanged() {
 		this.$nextTick(() => {
 			const target = document.querySelector(".active");
@@ -38,7 +41,7 @@ export default class Wrapper extends Vue {
 	}
 	@Watch("scriptPackage")
 	initDataResource() {
-		console.log('scriptPackage');
+		console.log("scriptPackage");
 		if (this.scriptPackage) {
 			navigationStoreModule.setDataResource(this.scriptPackage);
 			setTimeout(() => {
@@ -53,6 +56,19 @@ export default class Wrapper extends Vue {
 			setTimeout(() => {
 				this.isReady = true;
 			}, 100);
+		}
+		if (this.eventHub) {
+			this.eventHub.$on("selectScriptItem", this.selectScriptItem);
+		}
+	}
+	private selectScriptItem(id: string) {
+		this.dataResource.setDataResource(this.scriptPackage);
+		const routes = this.dataResource.getRoutesById(id);
+		navigationStoreModule.setRoutes(routes);
+	}
+	private destroyed() {
+		if (this.eventHub) {
+			this.eventHub.$off("selectScriptItem", this.selectScriptItem);
 		}
 	}
 }
