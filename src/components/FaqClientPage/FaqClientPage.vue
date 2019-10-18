@@ -6,7 +6,7 @@
       />
 		</div>-->
 		<div class="main">
-			<ColumnNavigation :style="Style" />
+			<ColumnNavigation :style="Style" :column-width="columnWidth" />
 			<!-- <div>scenario:</div> -->
 			<!-- <VerticalNavigation v-if="sections.scenario" :range="sections.scenario" />
 			{{sections.scenario}}
@@ -32,6 +32,8 @@ import { navigationStoreModule } from "./store/navigationStore";
 export default class FaqClientPage extends Vue {
 	@Prop()
 	height: any;
+	@Prop()
+	columnWidth:any;
 	get Style() {
 		return {
 			height: this.height || "400px"

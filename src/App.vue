@@ -1,8 +1,13 @@
 <template>
 	<div id="app">
 		<img alt="Vue logo" src="./assets/logo.png" />
+		<code>
+			<pre class="prettyprint lang-js" >
+				&lt;AndyKurage :script-package=&quot;scriptPackage&quot;  :column-width=&quot;500&quot; :height=&quot;&apos;600px&apos;&quot; /&gt;
+			</pre>
+		</code>
 		<div v-if="isReady">
-			<AndyKurage :script-package="scriptPackage" />
+			<AndyKurage :script-package="scriptPackage"  :column-width="500" :height="'600px'" />
 		</div>
 	</div>
 </template>

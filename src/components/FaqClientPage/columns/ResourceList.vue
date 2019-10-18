@@ -4,7 +4,7 @@
 			<div class="caption" v-show="item && item.caption" v-html="Item && Item.caption"></div>
 			<div ref="items" class="items">
 				<div
-					:class="['item', isSelected(Item) && 'selected']"
+					:class="['item', isSelected(_item) && 'selected']"
 					v-for="(_item, index) in List"
 					:key="index"
 				>
@@ -49,17 +49,6 @@ import _ from "lodash";
 import { Component, Vue, Prop } from "vue-property-decorator";
 import ScrollGuide from "../ScrollGuide.vue";
 import { navigationStoreModule } from "../store/navigationStore";
-// import AsyncComputed from 'vue-async-computed'
-// Vue.directive("scroll", {
-// 	inserted: function(el, binding) {
-// 		let f = function(evt: any) {
-// 			if (binding.value(evt, el)) {
-// 				// window.removeEventListener('scroll', f);
-// 			}
-// 		};
-// 		el.addEventListener("scroll", f);
-// 	}
-// });
 
 @Component({
 	components: {
@@ -101,7 +90,6 @@ export default class ResourceList extends Vue {
 		this.item = this.Item;
 		this.list = this.List;
 	}
-	// @AsyncComputed()
 	get List() {
 		const dataResource = navigationStoreModule.DataResource;
 		if (dataResource) {
@@ -110,7 +98,6 @@ export default class ResourceList extends Vue {
 		}
 		return [];
 	}
-	// @AsyncComputed()
 	get Item() {
 		const dataResource = navigationStoreModule.DataResource;
 		if (dataResource && 'getItem' in dataResource) {

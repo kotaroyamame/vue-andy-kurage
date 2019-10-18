@@ -1,7 +1,7 @@
 <template>
 	<div class>
 		<div v-if="isReady">
-			<FaqClientPage :height="height" />
+			<FaqClientPage :height="height" :column-width="columnWidth" />
 		</div>
 	</div>
 </template>
@@ -30,6 +30,8 @@ export default class Wrapper extends Vue {
 	eventHub: any;
 	@Prop()
 	height: any;
+	@Prop({ type: Number, default: 300 })
+	columnWidth: any;
 	@Watch("navigationStoreModule.Routes")
 	onRouteChanged() {
 		this.$nextTick(() => {

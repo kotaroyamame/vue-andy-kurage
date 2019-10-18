@@ -110,11 +110,12 @@ export default class ColumnNavigation extends Vue {
 	index = 0;
 	boundedNavigationStores: any = [];
 	componentWidth = 0;
-	columnWidth = 300;
 	localMap: any = new Map();
 	locals = [];
 	isFasttimeMove: boolean = false;
 	touchParam = new TouchParam();
+	@Prop()
+	columnWidth:any;
 	get Routes() {
 		return navigationStoreModule.Routes;
 	}
