@@ -1,10 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import dataResource from '../dataResource';
 import { DataResource } from '../dataResource';
 import store from './';
 import { VuexModule, Module, MutationAction, Mutation, Action, getModule } from 'vuex-module-decorators';
-// import { eventHub } from '@/init/eventHub';
 /* eslint-disable */
 // Vue.use(Vuex);
 @Module({ dynamic: true, store, name: 'navigationStore', namespaced: true })
@@ -96,18 +94,33 @@ class navigationStore extends VuexModule {
 			this.eventHub.$emit('setResultScript', Object.assign({}, route, { query: "-", routes: this.routes }));
 		}
 	}
+	@Mutation
+	setRoutesAndIndex({routes,index}:any){
+
+		this.routes=routes;
+		this.index=index;
+		console.log(this.routes);
+	}
 	// indexの次の位置で開く
-	@MutationAction({ mutate: ['routes', 'index'] })
+	// @MutationAction({ mutate: ['routes', 'index'] })
+	@Action({
+		commit:"setRoutesAndIndex"
+	})
 	open({ route, index }: any): any {
-		const getters: any = this.getters;
-		console.log(getters.Routes);
+		console.log(index);
+
+		// console.log(getters.Routes);
 		let routes = [];
 		if (route.viewType !== "result") {
-			routes = getters.Routes.slice(0, index + 1).concat([route]);
+			routes = this.Routes.slice(0, index + 1).concat([route]);
 			index = index + 1;
 		} else {
-			routes = getters.Routes.slice(0, index + 1).concat([route]);
-			this.commit('setResultScript', route);
+			routes = this.Routes.slice(0, index + 1).concat([route]);
+			index = index + 1;
+			// this.context.commit('setResultScript', route);
+			if (this.eventHub && '$emit' in this.eventHub) {
+				this.eventHub.$emit('setResultScript', Object.assign({}, route, { query: "-", routes: this.routes }));
+			}
 		}
 
 		// let index = getters.Index;

@@ -15,24 +15,23 @@
 			>
 				<div
 					class="page"
-					v-if="route.talkScriptType!='leaf'"
 					v-for="(route, routeIndex) in routes"
 					:key="routeIndex"
 					:style="{
-            left: getColumnLeft(routeIndex) + 'px',
-            width: getColumnWidth(routeIndex) + 'px',
-          }"
+						left: getColumnLeft(routeIndex) + 'px',
+						width: getColumnWidth(routeIndex) + 'px',
+					}"
 				>
 					<component
 						:is="route.componentName"
 						:index="routeIndex"
 						:currentValue="route"
 						:prevValue="
-              Routes[baseIndex + routeIndex - 1]
-            "
+							Routes[baseIndex + routeIndex - 1]
+						"
 						:nextValue="
-              Routes[baseIndex + routeIndex + 1]
-            "
+							Routes[baseIndex + routeIndex + 1]
+						"
 						:currentLocal="locals[routeIndex]"
 						:prevLocal="locals[routeIndex - 1]"
 						:nextLocal="locals[routeIndex + 1]"
@@ -101,6 +100,7 @@ class TouchParam {
 		return this.X;
 	}
 }
+// tslint:disable-next-line:max-classes-per-file
 @Component({
 	components: {
 		ResourceList
@@ -110,11 +110,12 @@ export default class ColumnNavigation extends Vue {
 	index = 0;
 	boundedNavigationStores: any = [];
 	componentWidth = 0;
-	columnWidth = 300;
 	localMap: any = new Map();
 	locals = [];
 	isFasttimeMove: boolean = false;
 	touchParam = new TouchParam();
+	@Prop()
+	columnWidth:any;
 	get Routes() {
 		return navigationStoreModule.Routes;
 	}

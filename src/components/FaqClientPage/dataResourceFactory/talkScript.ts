@@ -61,6 +61,7 @@ export class TalkScriptResource {
 		}
 	}
 	convertItem = (item: any) => {
+		console.log(item);
 		if (!this.cache.has(item)) {
 			const convertedItem = {
 				text: item.text,
@@ -94,17 +95,29 @@ export class TalkScriptResource {
 						talkScriptType: 'leaf',
 					})
 				);
-			} else if (item.type === 'leaf' && item.items) {
+			} else if (item.type === 'leaf' && item.items && item.items.scenario_id) {
 				this.cache.set(
 					item,
 					Object.assign(convertedItem, {
-						resourceName: 'talkScript',
+						resourceName: 'scenario',
 						scenarioId: item.items.scenario_id,
 						viewType: 'result',
 						talkScriptType: 'leaf',
 					})
 				);
-			} else {
+			}
+			// else if (item.type === 'leaf' && item.items) {
+			// 	this.cache.set(
+			// 		item,
+			// 		Object.assign(convertedItem, {
+			// 			resourceName: 'talkScript',
+			// 			scenarioId: item.items.scenario_id,
+			// 			viewType: 'result',
+			// 			talkScriptType: 'leaf',
+			// 		})
+			// 	);
+			// } 
+			else {
 				this.cache.set(
 					item,
 					Object.assign(convertedItem, {

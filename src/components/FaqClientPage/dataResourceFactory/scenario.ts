@@ -1,4 +1,4 @@
-import {Scenario} from '../scenarioApi';
+import { Scenario } from '../scenarioApi';
 // declare var window: any;
 // console.log(scenarioApi);
 
@@ -8,7 +8,7 @@ import {Scenario} from '../scenarioApi';
 
 export class ScenarioResource {
 	cache: any = new WeakMap();
-	scenariolist:any = new Scenario();
+	scenariolist: any = new Scenario();
 	constructor() {
 
 	}
@@ -16,16 +16,28 @@ export class ScenarioResource {
 		this.scenariolist.ready(scenariolist);
 	}
 	getList(params: any) {
-		const scenario = this.scenariolist[params.scenarioId];
-		let step: any = null;
-		if (params.stepId) {
-			step = scenario.steps[params.stepId];
-		} else {
-			step = scenario.rootStep;
+		console.log("Scenario getList");
+		let scenario = this.scenariolist.scenarios[params.scenarioId];
+		if (scenario == undefined) {
+			for (const key in this.scenariolist.scenarios) {
+				if (params.scenarioId == this.scenariolist.scenarios[key].rootStep.scenarioId) {
+					scenario = this.scenariolist.scenarios[key];
+					break;
+				}
+			}
 		}
-		return step.options.map((option: any) =>
-			this.convertOption({ scenario, step, option })
-		);
+		if (scenario) {
+			let step: any = null;
+			if (params.stepId) {
+				step = scenario.steps[params.stepId];
+			} else {
+				step = scenario.rootStep;
+			}
+			return step.options.map((option: any) =>
+				this.convertOption({ scenario, step, option })
+			);
+		}
+		return [];
 	}
 	isEquals(a: any, b: any) {
 		return (
@@ -36,7 +48,15 @@ export class ScenarioResource {
 	}
 
 	getItem(params: any) {
-		const scenario = this.scenariolist[params.scenarioId];
+		console.log("Scenario getItem");
+		let scenario = this.scenariolist.scenarios[params.scenarioId];
+		if (scenario == undefined) {
+			for (const key in this.scenariolist.scenarios) {
+				if (params.scenarioId == this.scenariolist.scenarios[key].rootStep.scenarioId) {
+					scenario = this.scenariolist.scenarios[key];
+				}
+			}
+		}
 		if (params.stepId) {
 			return this.convertStep({
 				step: scenario.steps[params.stepId],

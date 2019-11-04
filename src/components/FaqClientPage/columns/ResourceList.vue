@@ -1,25 +1,25 @@
 <template>
 	<ScrollGuide ref="scrollGuide">
 		<div :class="[active && 'active', 'ResourceList', 'scrollY']" v-scroll="onScroll">
-			<div class="caption" v-show="item && item.caption" v-html="item && item.caption"></div>
+			<div class="caption" v-show="item && item.caption" v-html="Item && Item.caption"></div>
 			<div ref="items" class="items">
 				<div
-					:class="['item', isSelected(item) && 'selected']"
-					v-for="(item, index) in List()"
+					:class="['item', isSelected(_item) && 'selected']"
+					v-for="(_item, index) in List"
 					:key="index"
 				>
 					<div class="relation">
 						<div class="relation-line"></div>
 					</div>
-					<div class="itemContent" @click="open(item)" :item-debug="JSON.stringify(item)">
+					<div class="itemContent" @click="open(_item)" :item-debug="JSON.stringify(_item)">
 						<!-- 要実装：itemクラスにleafクラスを付与するとQアイコンが表示される。-->
 						<span>
 							<span class="itemIcon"></span>
-							{{ item.text }}
+							{{ _item.text }}
 						</span>
 						<!-- <i
               @click="
-                edit(item);
+                edit(_item);
                 $event.stopPropagation();
               "
               class="fa fa-edit"
@@ -49,16 +49,6 @@ import _ from "lodash";
 import { Component, Vue, Prop } from "vue-property-decorator";
 import ScrollGuide from "../ScrollGuide.vue";
 import { navigationStoreModule } from "../store/navigationStore";
-// Vue.directive("scroll", {
-// 	inserted: function(el, binding) {
-// 		let f = function(evt: any) {
-// 			if (binding.value(evt, el)) {
-// 				// window.removeEventListener('scroll', f);
-// 			}
-// 		};
-// 		el.addEventListener("scroll", f);
-// 	}
-// });
 
 @Component({
 	components: {
@@ -97,11 +87,10 @@ export default class ResourceList extends Vue {
 	item: any = {};
 	list: any = [];
 	created() {
-		this.item = this.Item();
-		this.list = this.List();
+		this.item = this.Item;
+		this.list = this.List;
 	}
-	// @AsyncComputed()
-	List() {
+	get List() {
 		const dataResource = navigationStoreModule.DataResource;
 		if (dataResource) {
 			const list = dataResource.getList(this.currentValue);
@@ -109,8 +98,7 @@ export default class ResourceList extends Vue {
 		}
 		return [];
 	}
-	// @AsyncComputed()
-	Item() {
+	get Item() {
 		const dataResource = navigationStoreModule.DataResource;
 		if (dataResource && 'getItem' in dataResource) {
 			const item = dataResource.getItem(this.currentValue);
@@ -139,11 +127,12 @@ export default class ResourceList extends Vue {
 			refs.scrollGuide && refs.scrollGuide.updateScrollGuide();
 		});
 	}
-	public open(route: any) {
+	public async open(route: any) {
 		console.log(route);
 		let index: any = this.index === undefined ? 0 : this.index;
 		// index++;
-		navigationStoreModule.open({ route, index });
+		await navigationStoreModule.open({ route, index });
+		this.$forceUpdate();
 	}
 	edit(item: any) {
 		// modalService.openModal({ component: ModalSample });
@@ -266,7 +255,7 @@ $headerImageWidth: 92px !default;
 		left: 0;
 		padding: 5px 0;
 		overflow-x: hidden;
-		overflow-y: scroll;
+		// overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 		user-select: none;
 	}
