@@ -64,8 +64,11 @@ class navigationStore extends VuexModule {
 			console.log('cancel navigation routes update');
 			return;
 		}
+		if ('$emit' in this.eventHub) {
+			this.eventHub.$emit('changeRoute', { routes, index: routes.length - 2});
+		}
 		return {
-			routes: routes,
+			routes,
 			index: routes.length - 2
 		}
 	}
@@ -100,6 +103,9 @@ class navigationStore extends VuexModule {
 		this.routes=routes;
 		this.index=index;
 		console.log(this.routes);
+		if ('$emit' in this.eventHub) {
+			this.eventHub.$emit('changeRoute', { routes, index });
+		}
 	}
 	// indexの次の位置で開く
 	// @MutationAction({ mutate: ['routes', 'index'] })
@@ -127,6 +133,9 @@ class navigationStore extends VuexModule {
 		// const routes = getters.Routes.slice(0, index + 1).concat([route]);
 		// console.log(getters.Routes);
 		// index = index + 1;
+		if ('$emit' in this.eventHub) {
+			this.eventHub.$emit('changeRoute', { routes, index });
+		}
 		return {
 			routes,
 			index
