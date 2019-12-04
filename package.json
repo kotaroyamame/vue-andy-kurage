@@ -7,6 +7,7 @@
   "jsdelivr": "./dist/vue-andy-kurage.umd.min.js",
   "types": "./dist/types/index.d.ts",
   "author": "Kotaro Andy",
+  "license": "MIT",
   "browser": "./dist/vue-andy-kurage.umd.min.js",
   "files": [
     "dist"
