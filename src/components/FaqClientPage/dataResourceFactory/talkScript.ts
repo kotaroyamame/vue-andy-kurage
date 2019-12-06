@@ -43,6 +43,9 @@ export class TalkScriptResource {
 		resourceName: 'talkScript',
 		talkScriptId: '#',
 	};
+	getTopItem(){
+		return [this.topItem];
+	}
 	getItemSync(params: any) {
 		if (!params.talkScriptId || params.talkScriptId === '#') {
 			return this.topItem;

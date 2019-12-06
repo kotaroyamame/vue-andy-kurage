@@ -48,6 +48,7 @@ class navigationStore extends VuexModule {
 
 		if (this.routes && this.routes[index]) {
 			this.index = index;
+			this.eventHub.$emit('changeRoute', { routes: this.routes, index });
 		}
 	}
 	@Action(
@@ -64,8 +65,9 @@ class navigationStore extends VuexModule {
 			console.log('cancel navigation routes update');
 			return;
 		}
-		if ('$emit' in this.eventHub) {
-			this.eventHub.$emit('changeRoute', { routes, index: routes.length - 2});
+		const state: any = this.state;
+		if (state && state.eventHub && '$emit' in state.eventHub) {
+			state.eventHub.$emit('changeRoute', { routes, index: routes.length - 2 });
 		}
 		return {
 			routes,
@@ -98,19 +100,19 @@ class navigationStore extends VuexModule {
 		}
 	}
 	@Mutation
-	setRoutesAndIndex({routes,index}:any){
+	setRoutesAndIndex({ routes, index }: any) {
 
-		this.routes=routes;
-		this.index=index;
+		this.routes = routes;
+		this.index = index;
 		console.log(this.routes);
-		if ('$emit' in this.eventHub) {
+		if (this.eventHub && '$emit' in this.eventHub) {
 			this.eventHub.$emit('changeRoute', { routes, index });
 		}
 	}
 	// indexの次の位置で開く
 	// @MutationAction({ mutate: ['routes', 'index'] })
 	@Action({
-		commit:"setRoutesAndIndex"
+		commit: "setRoutesAndIndex"
 	})
 	open({ route, index }: any): any {
 		console.log(index);
@@ -133,7 +135,7 @@ class navigationStore extends VuexModule {
 		// const routes = getters.Routes.slice(0, index + 1).concat([route]);
 		// console.log(getters.Routes);
 		// index = index + 1;
-		if ('$emit' in this.eventHub) {
+		if (this.eventHub && '$emit' in this.eventHub) {
 			this.eventHub.$emit('changeRoute', { routes, index });
 		}
 		return {
@@ -159,6 +161,7 @@ class navigationStore extends VuexModule {
 		return this.canMovePositionTo(this.index + relative);
 	}
 	canMovePositionTo(index: any) {
+		
 		return this.routes[index] != null;
 	}
 

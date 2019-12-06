@@ -17,6 +17,9 @@ export class DataResource {
 	getItem(params: any) {
 		return this.dataResourceFactory[params.resourceName].getItem(params);
 	}
+	getTopItem(){
+		return this.dataResourceFactory.talkScript.getTopItem();
+	}
 	getRoutesById(id: string) {
 		return this.dataResourceFactory.talkScript.getRoutesById(id);
 	}

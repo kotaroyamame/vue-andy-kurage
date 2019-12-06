@@ -1,6 +1,6 @@
 {
   "name": "vue-andy-kurage",
-  "version": "0.1.9",
+  "version": "0.1.22",
   "private": false,
   "main": "./dist/vue-andy-kurage.common.js",
   "unpkg": "./dist/vue-andy-kurage.umd.min.js",
@@ -8,7 +8,7 @@
   "types": "./dist/types/index.d.ts",
   "author": "Kotaro Andy",
   "license": "MIT",
-  "browser": "./dist/vue-andy-kurage.umd.min.js",
+  "browser": "./dist/vue-andy-kurage.umd.js",
   "files": [
     "dist"
   ],

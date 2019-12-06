@@ -61,16 +61,30 @@ export default class Wrapper extends Vue {
 		}
 		if (this.eventHub) {
 			this.eventHub.$on("selectScriptItem", this.selectScriptItem);
+			this.eventHub.$on("setRoutes", this.setRoutes);
+			this.eventHub.$on("setIndex", this.setIndex);
 		}
 	}
 	private selectScriptItem(id: string) {
 		this.dataResource.setDataResource(this.scriptPackage);
+		if (id === "#") {
+			navigationStoreModule.setRoutes(this.dataResource.getTopItem());
+			return;
+		}
 		const routes = this.dataResource.getRoutesById(id);
 		navigationStoreModule.setRoutes(routes);
+	}
+	private setRoutes(routes: Array<any>) {
+		navigationStoreModule.setRoutes(routes);
+	}
+	private setIndex(index: number) {
+		navigationStoreModule.movePositionTo(index);
 	}
 	private destroyed() {
 		if (this.eventHub) {
 			this.eventHub.$off("selectScriptItem", this.selectScriptItem);
+			this.eventHub.$off("setRoutes", this.setRoutes);
+			this.eventHub.$off("setIndex", this.setIndex);
 		}
 	}
 }
