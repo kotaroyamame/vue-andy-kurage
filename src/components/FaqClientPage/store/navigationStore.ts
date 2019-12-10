@@ -116,7 +116,9 @@ class navigationStore extends VuexModule {
 	})
 	open({ route, index }: any): any {
 		console.log(index);
-
+		if (this.eventHub && '$emit' in this.eventHub) {
+			this.eventHub.$emit('setScript', route);
+		}
 		// console.log(getters.Routes);
 		let routes = [];
 		if (route.viewType !== "result") {
