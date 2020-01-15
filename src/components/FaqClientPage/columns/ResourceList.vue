@@ -100,7 +100,7 @@ export default class ResourceList extends Vue {
 	}
 	get Item() {
 		const dataResource = navigationStoreModule.DataResource;
-		if (dataResource && 'getItem' in dataResource) {
+		if (dataResource && "getItem" in dataResource) {
 			const item = dataResource.getItem(this.currentValue);
 			return item;
 		}
@@ -260,7 +260,7 @@ $headerImageWidth: 92px !default;
 		user-select: none;
 	}
 	&.active {
-		background: #fff8f8;
+		// background: #fff8f8;
 	}
 	img {
 		display: block;
@@ -368,6 +368,7 @@ $headerImageWidth: 92px !default;
 }
 
 .anchor {
+	display: none;
 	position: absolute;
 	top: 50px;
 	left: 7px;
