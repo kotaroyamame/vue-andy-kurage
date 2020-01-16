@@ -77,9 +77,14 @@ export const updateRelation = ({
 			}
 		}
 		if (scrollAnchor) {
-			scrollAnchor.style.display = 'none';
-			// scrollAnchor.style.display = 'block';
-			// scrollAnchor.style.top = scrollAnchorTop + 'px';
+			if (items.length <= 1) {
+				scrollAnchor.style.display = 'none';
+			} else {
+				scrollAnchor.style.display = 'block';
+				scrollAnchor.style.top = scrollAnchorTop + 'px';
+			}
+
+
 		}
 		if (anchor) {
 			anchor.style.display = 'block';

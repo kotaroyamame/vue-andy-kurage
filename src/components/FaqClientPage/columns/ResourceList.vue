@@ -324,7 +324,8 @@ $headerImageWidth: 92px !default;
 		flex: 1;
 		margin-right: 5px;
 		margin-left: 10px;
-		padding: 4px;
+		// padding: 4px;
+		overflow: hidden !important;
 	}
 	> i {
 		margin-right: 5px;
