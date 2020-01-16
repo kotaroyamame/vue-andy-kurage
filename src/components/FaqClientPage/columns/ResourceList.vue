@@ -1,7 +1,10 @@
 <template>
 	<ScrollGuide ref="scrollGuide">
 		<div :class="[active && 'active', 'ResourceList', 'scrollY']" v-scroll="onScroll">
-			<div class="caption" v-show="item && item.caption" v-html="Item && Item.caption"></div>
+			<div class="caption" v-show="item && item.caption">
+				<div class="caption__title" v-html="Item && Item.text"></div>
+				<div v-html="Item && Item.caption"></div>
+			</div>
 			<div ref="items" class="items">
 				<div
 					:class="['item', isSelected(_item) && 'selected']"
@@ -102,6 +105,7 @@ export default class ResourceList extends Vue {
 		const dataResource = navigationStoreModule.DataResource;
 		if (dataResource && "getItem" in dataResource) {
 			const item = dataResource.getItem(this.currentValue);
+			console.log(item);
 			return item;
 		}
 		return {};
@@ -453,6 +457,11 @@ $headerImageWidth: 92px !default;
 
 .caption {
 	white-space: pre-wrap;
+	&__title {
+		font-size: 1.1em;
+		margin: auto;
+		padding: 12px;
+	}
 	.VerticalNavigation & {
 		display: block;
 		margin: 24px 0;
