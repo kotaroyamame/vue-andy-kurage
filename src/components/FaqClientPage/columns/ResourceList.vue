@@ -3,7 +3,7 @@
 		<div :class="[active && 'active', 'ResourceList', 'scrollY']" v-scroll="onScroll">
 			<div class="caption" v-show="item && item.caption">
 				<div class="caption__title" v-html="Item && Item.text"></div>
-				<div v-html="Item && Item.caption"></div>
+				<div class="caption__text" v-html="Item && Item.caption"></div>
 			</div>
 			<div ref="items" class="items">
 				<div
@@ -458,9 +458,14 @@ $headerImageWidth: 92px !default;
 .caption {
 	white-space: pre-wrap;
 	&__title {
-		font-size: 1.1em;
+		font-size: 1.32em;
+		color: $activeRelationColor;
 		margin: auto;
 		padding: 12px;
+		// background: $relationColor;
+	}
+	&__text{
+		padding-bottom:120px;
 	}
 	.VerticalNavigation & {
 		display: block;
