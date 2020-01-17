@@ -458,14 +458,17 @@ $headerImageWidth: 92px !default;
 .caption {
 	white-space: pre-wrap;
 	&__title {
-		font-size: 1.32em;
-		color: $activeRelationColor;
-		margin: auto;
-		padding: 12px;
-		// background: $relationColor;
+		padding: 0 0 5px 3px;
+		border-bottom: 2px solid $activeRelationColor;
+		margin-bottom: 15px !important;
+		position: relative;
+		line-height: 1.2;
+		font-size: 16px !important;
+		font-weight: bold !important;
+		margin: 0 !important;
 	}
-	&__text{
-		padding-bottom:120px;
+	&__text {
+		padding-bottom: 120px;
 	}
 	.VerticalNavigation & {
 		display: block;
