@@ -28,6 +28,7 @@ $arroColor: #888;
 		box-sizing: border-box;
 		width: 100px;
 		height: 100px;
+		margin:auto !important;
 		margin-right: auto !important;
 		margin-left: auto !important;
 		padding: 12px;
@@ -38,33 +39,38 @@ $arroColor: #888;
 	}
 	&__icon {
 		font-size: 50px;
+		margin:auto !important;
 	}
 	&__cap {
-		position: absolute;
-		right: 0;
-		bottom: 10px;
-		left: 0;
-		width: 20px;
-		height: 20px;
+		position: absolute !important;
+		margin:auto !important;
+		right: 0 !important;
+		bottom: 10px !important;
+		left: 0 !important;
+		width: 20px !important;
+		height: 20px !important;
 		margin-right: auto;
 		margin-left: auto;
-		border: 3px solid;
-		border-color: transparent transparent $arroColor $arroColor;
-		transform: rotate(-45deg);
+		border: 3px solid !important;
+		border-color: transparent transparent $arroColor $arroColor !important;
+		transform: rotate(-45deg) !important;
 		text-align: center !important;
 	}
 	&__text {
 		display: block;
 		font-size: 16px;
 		text-align: center !important;
+		margin:auto !important;
 	}
 	&__line {
 		position: absolute;
+		padding:2px !important;
 		right: 0;
 		bottom: 10px;
 		left: 0;
 		width: 3px;
 		height: 60px;
+		margin:auto !important;
 		margin-right: auto;
 		margin-left: auto;
 		background: $arroColor;

@@ -1,6 +1,6 @@
 {
   "name": "vue-andy-kurage",
-  "version": "0.1.36",
+  "version": "0.1.39",
   "private": false,
   "main": "./dist/vue-andy-kurage.common.js",
   "unpkg": "./dist/vue-andy-kurage.umd.min.js",

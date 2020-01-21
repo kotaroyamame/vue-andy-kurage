@@ -2,7 +2,7 @@
 	<div>
 		<slot @updateScrollGuide="updateScrollGuide"></slot>
 		<div class="scrollGuide" v-show="showGuide">
-			<ScrollGuideContent/>
+			<ScrollGuideContent />
 		</div>
 	</div>
 </template>
@@ -11,12 +11,12 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import ScrollGuideContent from "./ScrollGuideContent.vue";
 @Component({
-	components:{ScrollGuideContent}
+	components: { ScrollGuideContent }
 })
 export default class ScrollGuide extends Vue {
 	showGuide = false;
-	scrollContainer:any = null;
-	scrolled(value:any) {
+	scrollContainer: any = null;
+	scrolled(value: any) {
 		this.showGuide = !value;
 	}
 	mounted() {
@@ -34,7 +34,7 @@ export default class ScrollGuide extends Vue {
 	updateScrollGuide() {
 		this.onScroll(null, true);
 	}
-	onScroll(event:any, forceSet:any) {
+	onScroll(event: any, forceSet: any) {
 		if (
 			this.scrollContainer.scrollTop > 30 || // 動かす
 			this.scrollContainer.scrollHeight <
@@ -63,6 +63,7 @@ export default class ScrollGuide extends Vue {
 	left: 0;
 	opacity: 0.8;
 	pointer-events: none;
+	height: 320px;
 	.pc & {
 		margin-right: auto;
 		margin-left: auto;
@@ -71,7 +72,7 @@ export default class ScrollGuide extends Vue {
 		height: 536px;
 	}
 	.mobile {
-		margin: auto;
+		margin: auto !important;
 	}
 }
 </style>
