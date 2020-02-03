@@ -36,9 +36,9 @@ export default class ScrollGuide extends Vue {
 	}
 	onScroll(event: any, forceSet: any) {
 		if (
-			this.scrollContainer.scrollTop > 30 || // 動かす
+			this.scrollContainer.scrollTop > 10 || // 動かす
 			this.scrollContainer.scrollHeight <
-				this.scrollContainer.clientHeight + this.scrollContainer.scrollTop + 5 // 最後までスクロール
+				this.scrollContainer.clientHeight + this.scrollContainer.scrollTop + 2 // 最後までスクロール
 		) {
 			this.showGuide = false;
 		} else if (forceSet) {

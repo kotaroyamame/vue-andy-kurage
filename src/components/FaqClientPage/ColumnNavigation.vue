@@ -10,7 +10,7 @@
 			<!-- 要実装：isRootクラスのオンオフ -->
 			<div
 				ref="navigationContent"
-				:class="{ navigationContent: true, isRoot: routes.length <= 1 }"
+				:class="{ navigationContent: true, isRoot: routes.length <= 1 ,isShow:isShow,cancelTransition:cancelTransition}"
 				:style="{ left: navigationLeft + 'px' }"
 			>
 				<div
@@ -114,8 +114,12 @@ export default class ColumnNavigation extends Vue {
 	locals = [];
 	isFasttimeMove: boolean = false;
 	touchParam = new TouchParam();
+	isShow = false;
+	cancelTransition = true;
 	@Prop()
-	columnWidth:any;
+	height: any;
+	@Prop()
+	columnWidth: any;
 	get Routes() {
 		return navigationStoreModule.Routes;
 	}
@@ -231,10 +235,13 @@ export default class ColumnNavigation extends Vue {
 	}
 	// lifecycle methods
 	mounted() {
+		// setTimeout(() => {
+		this.updateComponentWidth();
+		// }, 1000);
 		setTimeout(() => {
-			this.updateComponentWidth();
-		}, 1000);
-
+			this.isShow = true;
+			this.cancelTransition = false;
+		}, 100);
 		window.addEventListener("resize", this.updateComponentWidth);
 	}
 	unmounted() {
@@ -269,7 +276,7 @@ export default class ColumnNavigation extends Vue {
 }
 .navigationContentWrapper {
 	position: absolute;
-	top: 32px;
+	top: 0px;
 	// top: $summaryHeight;
 	// top: $headerHeight + $summaryHeight;
 	bottom: 0;
@@ -277,12 +284,19 @@ export default class ColumnNavigation extends Vue {
 	margin: 0 0px;
 	overflow: hidden;
 }
+.cancelTransition {
+	transition: none !important;
+}
 .navigationContent {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	width: 100%;
 	transition: left 0.5s;
+	opacity: 0 !important;
+	&.isShow {
+		opacity: 1 !important;
+	}
 	.pc &.isRoot {
 		// background-image: url(./../resource/n/navigation-background-full.png);
 		background-repeat: no-repeat;

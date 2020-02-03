@@ -6,7 +6,7 @@
       />
 		</div>-->
 		<div class="main">
-			<ColumnNavigation :style="Style" :column-width="columnWidth" />
+			<ColumnNavigation :style="Style" :column-width="columnWidth" :height="height" />
 			<!-- <div>scenario:</div> -->
 			<!-- <VerticalNavigation v-if="sections.scenario" :range="sections.scenario" />
 			{{sections.scenario}}
