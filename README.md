@@ -103,5 +103,60 @@ scriptPackage
 }
 ```
 
+### Event
+
+Add param
+
+eventHub
+
+eventHub.ts
+```
+import Vue from "vue";
+
+export const eventHub = new Vue();
+```
+
+example.vue
+
+```
+<script>
+import { eventHub } from "../eventHub";
+...
+data: function() {
+		return {
+			eventHub: eventHub,
+...
+```
+
+```
+<template>
+...
+<AndyKurage :script-package="scriptPackage"  :column-width="500" :height="'600px'" :eventHub="eventHub" />
+...
+```
+#### changeRoute
+
+```
+eventBus.$on("changeRoute", ({ routes, index }) => {
+
+})
+```
+
+#### setScript
+
+click item
+
+```
+eventBus.$on("setScript", item => {})
+```
+
+#### setResultScript
+
+click result item
+
+```
+eventBus.$on("setResultScript", item => {})
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
