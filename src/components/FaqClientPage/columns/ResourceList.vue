@@ -39,7 +39,7 @@
 	</ScrollGuide>
 </template>
 <script lang="ts">
-import Vue2 from "vue";
+// import Vue2 from "vue";
 // import Component from 'vue-class-component';
 import { Watch } from "vue-property-decorator";
 // import dataResource from "../dataResource";
@@ -93,6 +93,11 @@ export default class ResourceList extends Vue {
 		this.item = this.Item;
 		this.list = this.List;
 	}
+	mounted() {
+		this.$nextTick(() => {
+			this.setSelectionPositions();
+		});
+	}
 	get List() {
 		const dataResource = navigationStoreModule.DataResource;
 		if (dataResource) {
@@ -117,7 +122,7 @@ export default class ResourceList extends Vue {
 		}
 
 		const refs: any = this.$refs;
-		Vue2.nextTick(() => {
+		this.$nextTick(() => {
 			refs.scrollGuide && refs.scrollGuide.updateScrollGuide();
 		});
 	}
@@ -127,7 +132,7 @@ export default class ResourceList extends Vue {
 			return;
 		}
 		const refs: any = this.$refs;
-		Vue2.nextTick(() => {
+		this.$nextTick(() => {
 			refs.scrollGuide && refs.scrollGuide.updateScrollGuide();
 		});
 	}
@@ -166,6 +171,9 @@ export default class ResourceList extends Vue {
 		this.updateRelation();
 	}
 	updated() {
+		this.setSelectionPositions();
+	}
+	setSelectionPositions() {
 		this.currentLocal.selectedPosition = getSelectionPosition({
 			items: this.$refs.items
 		});
@@ -175,9 +183,9 @@ export default class ResourceList extends Vue {
 				scrollIntoViewY(selectedElement);
 			}, 20);
 		}
-		Vue2.nextTick(() => {
+		this.$nextTick(() => {
 			this.updateRelation();
-		}, 0);
+		});
 	}
 	updateRelation() {
 		updateRelation({
