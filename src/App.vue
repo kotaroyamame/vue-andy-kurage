@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div class="vue-andy-kurage-appWrap">
 		<img alt="Vue logo" src="./assets/logo.png" />
 		<code>
 			<pre class="prettyprint lang-js" >
@@ -37,7 +37,7 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
-#app {
+.vue-andy-kurage-appWrap {
 	font-family: "Avenir", Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

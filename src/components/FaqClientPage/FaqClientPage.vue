@@ -1,11 +1,11 @@
 <template>
-	<div class="FaqClientPage scrollY">
+	<div class="vue-andy-kurage-FaqClientPage vue-andy-kurage-scrollY">
 		<!-- <div class="searchBox">
       <TaggedInput
         :navigationStore="navigationStore"
       />
 		</div>-->
-		<div class="main">
+		<div class="vue-andy-kurage-main">
 			<ColumnNavigation :style="Style" :column-width="columnWidth" :height="height" />
 			<!-- <div>scenario:</div> -->
 			<!-- <VerticalNavigation v-if="sections.scenario" :range="sections.scenario" />
@@ -45,7 +45,7 @@ export default class FaqClientPage extends Vue {
 	@Watch("navigationStoreModule.Routes")
 	onRouteChanged() {
 		this.$nextTick(() => {
-			const target = document.querySelector(".active");
+			const target = document.querySelector(".vue-andy-kurage-active");
 			if (target) {
 				scrollUtil.scrollIntoViewY(target);
 			}
@@ -54,19 +54,19 @@ export default class FaqClientPage extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.FaqClientPage {
+<style lang="scss">
+.vue-andy-kurage-FaqClientPage {
 	overflow-y: scroll;
 	flex: 1;
 	// border: 10px green solid;
 	box-sizing: border-box;
 	// display: flex;
 	// flex-direction: column;
-	> .searchBox {
+	> .vue-andy-kurage-searchBox {
 		padding: 15px;
 		background: #ccc;
 	}
-	> .main {
+	> .vue-andy-kurage-main {
 		// flex: 1;
 		// display: flex;
 		// flex-direction: column;

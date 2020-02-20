@@ -1,8 +1,8 @@
 <template>
-	<div class="ColumnNavigation" ref="ColumnNavigation">
+	<div class="vue-andy-kurage-ColumnNavigation" ref="ColumnNavigation">
 		<!-- <Breadcrumbs :navigationStore="navigationStore" :range="range" /> -->
 		<div
-			class="navigationContentWrapper"
+			class="vue-andy-kurage-navigationContentWrapper"
 			@touchmove="onTouchmove"
 			@touchstart="onTouchstart"
 			@touchend="onTouchend"
@@ -10,11 +10,11 @@
 			<!-- 要実装：isRootクラスのオンオフ -->
 			<div
 				ref="navigationContent"
-				:class="{ navigationContent: true, isRoot: routes.length <= 1 ,isShow:isShow,cancelTransition:cancelTransition}"
+				:class="{ 'vue-andy-kurage-navigationContent': true, 'vue-andy-kurage-isRoot': routes.length <= 1 ,'vue-andy-kurage-isShow':isShow,'vue-andy-kurage-cancelTransition':cancelTransition}"
 				:style="{ left: navigationLeft + 'px' }"
 			>
 				<div
-					class="page"
+					class="vue-andy-kurage-page--column"
 					v-for="(route, routeIndex) in routes"
 					:key="routeIndex"
 					:style="{
@@ -43,7 +43,7 @@
 		</div>
 		<div
 			v-show="canMovePositionBy(-1)"
-			class="navigationButton navigationButtonLeft"
+			class="vue-andy-kurage-navigationButton vue-andy-kurage-navigationButtonLeft"
 			@click="movePositionBy(-1)"
 		>
 			<i class="fa fa-chevron-left"></i>
@@ -51,7 +51,7 @@
 
 		<div
 			v-show="canMovePositionBy(1)"
-			class="navigationButton navigationButtonRight"
+			class="vue-andy-kurage-navigationButton vue-andy-kurage-navigationButtonRight"
 			@click="movePositionBy(1)"
 		>
 			<i class="fa fa-chevron-right"></i>
@@ -267,14 +267,14 @@ export default class ColumnNavigation extends Vue {
 	// }
 }
 </script>
-<style lang="scss" scoped>
-.ColumnNavigation {
+<style lang="scss">
+.vue-andy-kurage-ColumnNavigation {
 	position: relative;
 	flex: 1;
 	box-sizing: border-box;
 	height: 100%;
 }
-.navigationContentWrapper {
+.vue-andy-kurage-navigationContentWrapper {
 	position: absolute;
 	top: 0px;
 	// top: $summaryHeight;
@@ -284,32 +284,32 @@ export default class ColumnNavigation extends Vue {
 	margin: 0 0px;
 	overflow: hidden;
 }
-.cancelTransition {
+.vue-andy-kurage-cancelTransition {
 	transition: none !important;
 }
-.navigationContent {
+.vue-andy-kurage-navigationContent {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	width: 100%;
 	transition: left 0.5s;
 	opacity: 0 !important;
-	&.isShow {
+	&.vue-andy-kurage-isShow {
 		opacity: 1 !important;
 	}
-	.pc &.isRoot {
+	.vue-andy-kurage-pc &.vue-andy-kurage-isRoot {
 		// background-image: url(./../resource/n/navigation-background-full.png);
 		background-repeat: no-repeat;
 		background-position-x: right;
 	}
 }
-.page {
+.vue-andy-kurage-page--column {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	box-sizing: border-box;
 }
-.navigationButton {
+.vue-andy-kurage-navigationButton {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -318,10 +318,10 @@ export default class ColumnNavigation extends Vue {
 	margin-bottom: auto;
 	font-size: 20px;
 	cursor: pointer;
-	&.navigationButtonLeft {
+	&.vue-andy-kurage-navigationButtonLeft {
 		left: 0;
 	}
-	&.navigationButtonRight {
+	&.vue-andy-kurage-navigationButtonRight {
 		right: 0;
 	}
 }

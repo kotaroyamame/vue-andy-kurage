@@ -6,4 +6,4 @@ Vue.use(AndyKurage);
 
 new Vue({
   render: (h) => h(App),
-}).$mount('#app');
+}).$mount('#vue-andy-kurage-app');

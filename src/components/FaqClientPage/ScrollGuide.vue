@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<slot @updateScrollGuide="updateScrollGuide"></slot>
-		<div class="scrollGuide" v-show="showGuide">
+		<div class="vue-andy-kurage-scrollGuide" v-show="showGuide">
 			<ScrollGuideContent />
 		</div>
 	</div>
@@ -20,7 +20,7 @@ export default class ScrollGuide extends Vue {
 		this.showGuide = !value;
 	}
 	mounted() {
-		this.scrollContainer = this.$el.querySelector(".scrollY");
+		this.scrollContainer = this.$el.querySelector(".vue-andy-kurage-scrollY");
 		this.scrollContainer &&
 			this.scrollContainer.addEventListener("scroll", this.onScroll);
 		setTimeout(() => {
@@ -38,7 +38,7 @@ export default class ScrollGuide extends Vue {
 		if (
 			this.scrollContainer.scrollTop > 10 || // 動かす
 			this.scrollContainer.scrollHeight <
-				this.scrollContainer.clientHeight + this.scrollContainer.scrollTop + 2 // 最後までスクロール
+				this.scrollContainer.clientHeight + this.scrollContainer.scrollTop + 20 // 最後までスクロール
 		) {
 			this.showGuide = false;
 		} else if (forceSet) {
@@ -54,8 +54,8 @@ export default class ScrollGuide extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.scrollGuide {
+<style lang="scss">
+.vue-andy-kurage-scrollGuide {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -64,14 +64,14 @@ export default class ScrollGuide extends Vue {
 	opacity: 0.8;
 	pointer-events: none;
 	height: 320px;
-	.pc & {
+	.vue-andy-kurage-pc & {
 		margin-right: auto;
 		margin-left: auto;
 	}
-	.pc .autocompleteWrapper & {
+	.vue-andy-kurage-pc .vue-andy-kurage-autocompleteWrapper & {
 		height: 536px;
 	}
-	.mobile {
+	.vue-andy-kurage-mobile {
 		margin: auto !important;
 	}
 }

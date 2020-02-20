@@ -1,16 +1,16 @@
 // deltaで示した方向について、スクロールできるエレメントを探す
 declare var window: any;
 export const getScrollableAnscesterWithDelta = (element: any, delta: any) => {
-  const selector = '.scrollX,.scrollY';
+  const selector = '.vue-andy-kurage-scrollX,.vue-andy-kurage-scrollY';
   for (
     let target = element;
     target;
     target = target.parentElement && target.parentElement.closest(selector)
   ) {
-    if (target.classList.contains('scrollX') && delta.x !== 0) {
+    if (target.classList.contains('vue-andy-kurage-scrollX') && delta.x !== 0) {
       // 横スクロールに関しては、propagationしない
       return target;
-    } else if (target.classList.contains('scrollY')) {
+    } else if (target.classList.contains('vue-andy-kurage-scrollY')) {
       // 縦スクロールに関しては、実際にスクロール可能範囲になければ、propagationする
       if (delta.y < 0 && target.scrollTop > 0) {
         return target;
@@ -28,8 +28,8 @@ export const getScrollableAnscesterWithDelta = (element: any, delta: any) => {
 // directionで示した方向で、スクロールできるエレメントを探す
 export const getScrollableAnscester = (element: any, direction: any) => {
   const selector = direction
-    ? '.scroll' + direction.toUpperCase()
-    : '.scrollX,.scrollY';
+    ? '.vue-andy-kurage-scroll' + direction.toUpperCase()
+    : '.vue-andy-kurage-scrollX,.vue-andy-kurage-scrollY';
   const target = element.closest(selector);
   return target || window;
 };

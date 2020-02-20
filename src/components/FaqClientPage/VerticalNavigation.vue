@@ -1,10 +1,10 @@
 <template>
-	<div class="VerticalNavigation">
+	<div class="vue-andy-kurage-VerticalNavigation">
 		VerticalNavigation
-		<div class="navigationContentWrapper">
+		<div class="vue-andy-kurage-navigationContentWrapper">
 
-			<div ref="navigationContent" class="navigationContent">
-				<div class="page clearfix" v-for="(route, routeIndex) in routes" :key="routeIndex">
+			<div ref="navigationContent" class="vue-andy-kurage-navigationContent">
+				<div class="vue-andy-kurage-page--vertical vue-andy-kurage-clearfix" v-for="(route, routeIndex) in routes" :key="routeIndex">
 					{{route.componentName}}
 					{{State}}
 					<component
@@ -220,7 +220,7 @@ export default class VerticalNavigation extends Vue {
 	// }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 %bottomTriangle {
 	content: "";
 	position: absolute;
@@ -235,24 +235,24 @@ export default class VerticalNavigation extends Vue {
 	border-color: #0a69d8 transparent transparent;
 }
 
-.VerticalNavigation {
+.vue-andy-kurage-VerticalNavigation {
 	box-sizing: border-box;
 	height: 100%;
 }
-.navigationContentWrapper {
+.vue-andy-kurage-navigationContentWrapper {
 	box-sizing: border-box;
 	width: 100%;
 	padding: 0 30px;
 	overflow: hidden;
-	.hasScenario & {
+	.vue-andy-kurage-hasScenario & {
 		padding-right: 20px;
 		padding-left: 20px;
 	}
 }
-.navigationContent {
+.vue-andy-kurage-navigationContent {
 	width: 100%;
 }
-.page {
+.vue-andy-kurage-page--vertical {
 	box-sizing: border-box;
 	margin-bottom: 30px;
 	padding-bottom: 30px;
@@ -263,11 +263,11 @@ export default class VerticalNavigation extends Vue {
 			@extend %bottomTriangle;
 		}
 	}
-	.resultContent & {
+	.vue-andy-kurage-resultContent & {
 		margin-bottom: 0;
 		padding-bottom: 0;
 	}
-	.scenario__section:not(:last-child) &:last-child {
+	.vue-andy-kurage-scenario__section:not(:last-child) &:last-child {
 		position: relative;
 		border-bottom: 2px solid #0a69d8;
 		&:before {
@@ -276,7 +276,7 @@ export default class VerticalNavigation extends Vue {
 	}
 }
 
-.ancester {
+.vue-andy-kurage-ancester {
 	font-size: 14px;
 }
 </style>

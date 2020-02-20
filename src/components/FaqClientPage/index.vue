@@ -48,19 +48,19 @@ export default class FaqClientPageWrapper extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.FaqClientPage {
+<style lang="scss">
+.vue-andy-kurage-FaqClientPage {
 	overflow-y: scroll;
 	flex: 1;
 	// border: 10px green solid;
 	box-sizing: border-box;
 	// display: flex;
 	// flex-direction: column;
-	> .searchBox {
+	> .vue-andy-kurage-searchBox {
 		padding: 15px;
 		background: #ccc;
 	}
-	> .main {
+	> .vue-andy-kurage-main {
 		// flex: 1;
 		// display: flex;
 		// flex-direction: column;

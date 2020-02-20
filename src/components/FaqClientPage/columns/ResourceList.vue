@@ -1,23 +1,23 @@
 <template>
 	<ScrollGuide ref="scrollGuide">
-		<div :class="[active && 'active', 'ResourceList', 'scrollY']" v-scroll="onScroll">
-			<div class="caption" v-show="item && item.caption">
-				<div class="caption__title" v-html="Item && Item.text"></div>
-				<div class="caption__text" v-html="Item && Item.caption"></div>
+		<div :class="[active && 'vue-andy-kurage-active', 'vue-andy-kurage-ResourceList', 'vue-andy-kurage-scrollY']" v-scroll="onScroll">
+			<div class="vue-andy-kurage-caption" v-show="item && item.caption">
+				<div class="vue-andy-kurage-caption__title" v-html="Item && Item.text"></div>
+				<div class="vue-andy-kurage-caption__text" v-html="Item && Item.caption"></div>
 			</div>
-			<div ref="items" class="items">
+			<div ref="items" class="vue-andy-kurage-items">
 				<div
-					:class="['item', isSelected(_item) && 'selected']"
+					:class="['vue-andy-kurage-item', isSelected(_item) && 'vue-andy-kurage-selected']"
 					v-for="(_item, index) in List"
 					:key="index"
 				>
-					<div class="relation">
-						<div class="relation-line"></div>
+					<div class="vue-andy-kurage-relation">
+						<div class="vue-andy-kurage-relation-line"></div>
 					</div>
-					<div class="itemContent" @click="open(_item)" :item-debug="JSON.stringify(_item)">
+					<div class="vue-andy-kurage-itemContent" @click="open(_item)" :item-debug="JSON.stringify(_item)">
 						<!-- 要実装：itemクラスにleafクラスを付与するとQアイコンが表示される。-->
-						<span>
-							<span class="itemIcon"></span>
+						<span class="vue-andy-kurage-span">
+							<span class="vue-andy-kurage-itemIcon vue-andy-kurage-span"></span>
 							{{ _item.text }}
 						</span>
 						<!-- <i
@@ -27,14 +27,14 @@
               "
               class="fa fa-edit"
 						></i>-->
-						<i class="fa fa-chevron-right"></i>
+						<i class="fa fa-chevron-right vue-andy-kurage-i"></i>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div ref="anchor" class="anchor">
-			<span class="anchorBar"></span>
-			<span class="anchorBox"></span>
+		<div ref="anchor" class="vue-andy-kurage-anchor">
+			<span class="vue-andy-kurage-anchorBar"></span>
+			<span class="vue-andy-kurage-anchorBox"></span>
 		</div>
 	</ScrollGuide>
 </template>
@@ -177,7 +177,7 @@ export default class ResourceList extends Vue {
 		this.currentLocal.selectedPosition = getSelectionPosition({
 			items: this.$refs.items
 		});
-		const selectedElement = this.$el.querySelector(".selected");
+		const selectedElement = this.$el.querySelector(".vue-andy-kurage-selected");
 		if (selectedElement) {
 			setTimeout(() => {
 				scrollIntoViewY(selectedElement);
@@ -201,7 +201,7 @@ export default class ResourceList extends Vue {
 	}
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @mixin gradation($gradationColor1, $gradationColor2) {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3b679e+0,7db9e8+100 */
 	background: $gradationColor2; /* Old browsers */
@@ -251,15 +251,15 @@ $summaryItemHeight: 24px !default;
 
 $headerImageWidth: 92px !default;
 
-.ResourceList {
-	.VerticalNavigation & {
+.vue-andy-kurage-ResourceList {
+	.vue-andy-kurage-VerticalNavigation & {
 		padding: 15px;
 		overflow-y: initial;
-		.resultContent & {
+		.vue-andy-kurage-resultContent & {
 			padding: 0;
 		}
 	}
-	.ColumnNavigation & {
+	.vue-andy-kurage-RexourceList__ColumnNavigation & {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -271,7 +271,7 @@ $headerImageWidth: 92px !default;
 		-webkit-overflow-scrolling: touch;
 		user-select: none;
 	}
-	&.active {
+	&.vue-andy-kurage-active {
 		// background: #fff8f8;
 	}
 	img {
@@ -281,20 +281,20 @@ $headerImageWidth: 92px !default;
 	}
 }
 
-.items {
-	.VerticalNavigation & {
+.vue-andy-kurage-items {
+	.vue-andy-kurage-VerticalNavigation & {
 		overflow: hidden;
 	}
 }
 
-.item {
+.vue-andy-kurage-item {
 	position: relative;
-	.VerticalNavigation & {
+	.vue-andy-kurage-VerticalNavigation & {
 		display: block;
 		float: left;
 		width: 33.333%;
 	}
-	&.leaf .itemIcon {
+	&.vue-andy-kurage-leaf .vue-andy-kurage-itemIcon {
 		height: 20px;
 		width: 20px;
 		display: inline-block;
@@ -306,7 +306,7 @@ $headerImageWidth: 92px !default;
 	}
 }
 
-.itemContent {
+.vue-andy-kurage-itemContent {
 	@include nonactive-button-color();
 	display: flex;
 	align-items: center;
@@ -331,7 +331,7 @@ $headerImageWidth: 92px !default;
 		left: 30px;
 		width: 2px;
 	}
-	> span {
+	> .vue-andy-kurage-span {
 		display: block;
 		flex: 1;
 		margin-right: 5px;
@@ -339,7 +339,7 @@ $headerImageWidth: 92px !default;
 		// padding: 4px;
 		overflow: hidden !important;
 	}
-	> i {
+	> .vue-andy-kurage-i {
 		margin-right: 5px;
 		font-size: 10px;
 		line-height: 8px;
@@ -351,15 +351,15 @@ $headerImageWidth: 92px !default;
 		top: 50%;
 		margin-top: -5px;
 	}
-	.item.selected & {
+	.vue-andy-kurage-item.vue-andy-kurage-selected & {
 		color: #fff;
 		border: 1px solid transparent;
 		@include active-button-color();
-		i {
+		.vue-andy-kurage-i {
 			color: #fff;
 		}
 	}
-	.VerticalNavigation & {
+	.vue-andy-kurage-VerticalNavigation & {
 		position: relative;
 		display: inline-block;
 		width: 93%;
@@ -368,36 +368,36 @@ $headerImageWidth: 92px !default;
 			left: auto;
 		}
 	}
-	.mobile & {
+	.vue-andy-kurage-mobile & {
 		font-size: 14px;
 	}
 }
 
-.anchor,
-.relation {
-	.VerticalNavigation & {
+.vue-andy-kurage-anchor,
+.vue-andy-kurage-relation {
+	.vue-andy-kurage-VerticalNavigation & {
 		display: none !important;
 	}
 }
 
-.anchor {
+.vue-andy-kurage-anchor {
 	display: none;
 	position: absolute;
 	top: 50px;
 	left: 7px;
-	&.selected {
-		.anchorBar {
+	&.vue-andy-kurage-selected {
+		.vue-andy-kurage-anchorBar {
 			top: -1px;
 			border-width: 3px;
 			border-color: $activeRelationColor;
 		}
-		.anchorBox {
+		.vue-andy-kurage-anchorBox {
 			background: $activeRelationColor;
 		}
 	}
 }
 
-.anchorBox {
+.vue-andy-kurage-anchorBox {
 	position: absolute;
 	top: -4px;
 	width: 8px;
@@ -406,7 +406,7 @@ $headerImageWidth: 92px !default;
 	border-radius: 4px;
 }
 
-.anchorBar {
+.vue-andy-kurage-anchorBar {
 	position: absolute;
 	top: 0;
 	right: -1px;
@@ -414,56 +414,56 @@ $headerImageWidth: 92px !default;
 	border-top: 1px solid $relationColor;
 }
 
-.scrollAnchor {
+.vue-andy-kurage-scrollAnchor {
 	left: 10px;
-	.anchorBox {
+	.vue-andy-kurage-anchorBox {
 		background: #f00;
 	}
 }
 
-.ColumnNavigation {
+.vue-andy-kurage-RexourceList__ColumnNavigation {
 	[ref="anchor"],
-	.scrollGuide {
+	.vue-andy-kurage-scrollGuide {
 		display: none;
 	}
 }
 
-.relation {
+.vue-andy-kurage-relation {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 10px;
 	width: 15px;
-	.item.selected & {
+	.vue-andy-kurage-item.vue-andy-kurage-selected & {
 		top: -1px;
 	}
 }
-.relation-line {
+.vue-andy-kurage-relation-line {
 	position: absolute;
 	right: 0;
 	left: 0;
-	.item.upper & {
+	.vue-andy-kurage-item.vue-andy-kurage-upper & {
 		top: 50%;
 		bottom: auto;
 		border-top: 1px solid $relationColor;
 		border-left: 1px solid $relationColor;
 		border-top-left-radius: 15px;
 	}
-	.item.lower & {
+	.vue-andy-kurage-item.vue-andy-kurage-lower & {
 		top: auto;
 		bottom: 50%;
 		border-bottom: 1px solid $relationColor;
 		border-left: 1px solid $relationColor;
 		border-bottom-left-radius: 15px;
 	}
-	.item.selected & {
+	.vue-andy-kurage-item.vue-andy-kurage-selected & {
 		border-width: 3px;
 		border-color: $activeRelationColor;
 		z-index: 1;
 	}
 }
 
-.caption {
+.vue-andy-kurage-caption {
 	white-space: pre-wrap;
 	&__title {
 		padding: 0 0 5px 3px;
@@ -478,26 +478,26 @@ $headerImageWidth: 92px !default;
 	&__text {
 		padding-bottom: 120px;
 	}
-	.VerticalNavigation & {
+	.vue-andy-kurage-VerticalNavigation & {
 		display: block;
 		margin: 24px 0;
 		font-weight: bold;
 		font-size: 18px;
 		color: #4c6874;
-		.resultContent & {
+		.vue-andy-kurage-resultContent & {
 			margin-bottom: 4px;
 			color: #000;
 			font-weight: normal;
 			font-size: 16px;
-			.hasScenario & {
+			.vue-andy-kurage-hasScenario & {
 				color: #4c6874;
 			}
 		}
 	}
-	.ColumnNavigation & {
+	.vue-andy-kurage-RexourceList__ColumnNavigation & {
 		padding: 10px 10px 10px 20px;
 	}
-	.mobile & {
+	.vue-andy-kurage-mobile & {
 		padding-top: 15px;
 		padding-bottom: 15px;
 		line-height: 1.5;

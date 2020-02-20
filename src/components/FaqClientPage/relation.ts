@@ -7,7 +7,7 @@ const limitWith = (base: any, limit: any) => {
 };
 
 export const getSelectionPosition = ({ items }: any) => {
-	const item = items && items.querySelector('.selected');
+	const item = items && items.querySelector('.vue-andy-kurage-selected');
 	return item ? item.offsetTop + item.clientHeight / 2 : null;
 };
 
@@ -39,7 +39,7 @@ export const updateRelation = ({
 	if (items) {
 		for (let itemIndex = 0; itemIndex < items.children.length; itemIndex += 1) {
 			const item = items.children[itemIndex];
-			const isSelected = item.classList.contains('selected');
+			const isSelected = item.classList.contains('vue-andy-kurage-selected');
 			if (isSelected) {
 				containsSelected = true;
 			}
@@ -48,8 +48,8 @@ export const updateRelation = ({
 			const relation = getRelation(item);
 			if (itemOffset > 0) {
 				// lower
-				item.classList.add('lower');
-				item.classList.remove('upper');
+				item.classList.add('vue-andy-kurage-lower');
+				item.classList.remove('vue-andy-kurage-upper');
 				const prevItem = items.children[itemIndex - 1];
 				relation.style.bottom = itemHeight / 2 + 'px';
 				relation.style.top = 'auto';
@@ -62,8 +62,8 @@ export const updateRelation = ({
 					) + 'px';
 			} else {
 				// upper
-				item.classList.add('upper');
-				item.classList.remove('lower');
+				item.classList.add('vue-andy-kurage-upper');
+				item.classList.remove('vue-andy-kurage-lower');
 				const nextItem = items.children[itemIndex - 1];
 				relation.style.top = itemHeight / 2 + 'px';
 				relation.style.bottom = 'auto';
@@ -90,9 +90,9 @@ export const updateRelation = ({
 			anchor.style.display = 'block';
 			anchor.style.top = anchorTop + 'px';
 			if (containsSelected) {
-				anchor.classList.add('selected');
+				anchor.classList.add('vue-andy-kurage-selected');
 			} else {
-				anchor.classList.remove('selected');
+				anchor.classList.remove('vue-andy-kurage-selected');
 			}
 		}
 	}
