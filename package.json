@@ -1,6 +1,6 @@
 {
   "name": "vue-andy-kurage",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "private": false,
   "main": "./dist/vue-andy-kurage.common.js",
   "unpkg": "./dist/vue-andy-kurage.umd.min.js",
@@ -45,7 +45,7 @@
     "@vue/cli-service": "^3.12.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
-    "typescript": "^3.4.3",
+    "typescript": "^3.8.2",
     "vue-template-compiler": "^2.6.10"
   },
   "postcss": {
