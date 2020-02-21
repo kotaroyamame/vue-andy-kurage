@@ -35,7 +35,7 @@ export default class Wrapper extends Vue {
 	@Watch("navigationStoreModule.Routes")
 	onRouteChanged() {
 		this.$nextTick(() => {
-			const target = document.querySelector(".active");
+			const target = document.querySelector(".vue-andy-kurage-active");
 			if (target) {
 				scrollUtil.scrollIntoViewY(target);
 			}
