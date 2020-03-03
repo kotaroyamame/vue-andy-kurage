@@ -13,7 +13,11 @@ import { navigationStoreModule } from "./FaqClientPage/store/navigationStore";
 import FaqClientPage from "./FaqClientPage/FaqClientPage.vue";
 import ResourceList from "./FaqClientPage/columns/ResourceList.vue";
 import { DataResource } from "./FaqClientPage/dataResource";
-import { getViewSections } from "./FaqClientPage/resourceNavigationUtil";
+import {
+	getViewSections,
+	openByResource
+} from "./FaqClientPage/resourceNavigationUtil";
+import base64url from "base64url";
 @Component({
 	components: { FaqClientPage, ResourceList }
 	// components: { TaggedInput, ColumnNavigation, VerticalNavigation, Breadcrumbs },
@@ -61,9 +65,65 @@ export default class Wrapper extends Vue {
 		}
 		if (this.eventHub) {
 			this.eventHub.$on("selectScriptItem", this.selectScriptItem);
+			this.eventHub.$on("selectScenarioItem", this.selectScenarioItem);
+			this.eventHub.$on(
+				"selectScenarioItemByStepEncoded",
+				this.selectScenarioItemByStepEncoded
+			);
 			this.eventHub.$on("setRoutes", this.setRoutes);
 			this.eventHub.$on("setIndex", this.setIndex);
 		}
+	}
+	private async selectScenarioItem(
+		talkScriptId: string,
+		stepIdList: string[] = []
+	) {
+		const stepIds = stepIdList;
+		const talkScript = await this.dataResource.getItem({
+			resourceName: "talkScript",
+			talkScriptId
+		});
+		const SearchObject = {
+			talkScript: talkScript,
+			scenarios:
+				stepIds &&
+				(await Promise.all(
+					stepIds.map((stepId: string) =>
+						this.dataResource.getItem({
+							resourceName: "scenario",
+							scenarioId: talkScript.scenarioId,
+							stepId
+						})
+					)
+				))
+		};
+		openByResource(navigationStoreModule, SearchObject);
+	}
+	private async selectScenarioItemByStepEncoded(
+		talkScriptId: string,
+		stepEncoded: string
+	) {
+		const stepIds =
+			(stepEncoded && JSON.parse(base64url.decode(stepEncoded))) || [];
+		const talkScript = await this.dataResource.getItem({
+			resourceName: "talkScript",
+			talkScriptId
+		});
+		const SearchObject = {
+			talkScript: talkScript,
+			scenarios:
+				stepIds &&
+				(await Promise.all(
+					stepIds.map((stepId: string) =>
+						this.dataResource.getItem({
+							resourceName: "scenario",
+							scenarioId: talkScript.scenarioId,
+							stepId
+						})
+					)
+				))
+		};
+		openByResource(navigationStoreModule, SearchObject);
 	}
 	private selectScriptItem(id: string) {
 		this.dataResource.setDataResource(this.scriptPackage);
@@ -85,6 +145,11 @@ export default class Wrapper extends Vue {
 			this.eventHub.$off("selectScriptItem", this.selectScriptItem);
 			this.eventHub.$off("setRoutes", this.setRoutes);
 			this.eventHub.$off("setIndex", this.setIndex);
+			this.eventHub.$off("selectScenarioItem", this.selectScenarioItem);
+			this.eventHub.$off(
+				"selectScenarioItemByStepEncoded",
+				this.selectScenarioItemByStepEncoded
+			);
 		}
 	}
 }

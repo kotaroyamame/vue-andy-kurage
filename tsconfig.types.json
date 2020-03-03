@@ -11,7 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "outDir": "./dist/types/",
+    "outDir": "./types/",
     "types": [
       "webpack-env",
       "mocha",
