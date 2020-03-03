@@ -158,5 +158,17 @@ click result item
 eventBus.$on("setResultScript", item => {})
 ```
 
+#### selectScenarioItem
+
+```
+eventBus.$emit(talkScriptId:string, stepIdList:Array<string>)
+```
+
+#### selectScenarioItemByStepEncoded
+
+```
+eventBus.$emit(talkScriptId:string, stepEncoded:string)
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
