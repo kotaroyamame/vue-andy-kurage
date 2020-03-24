@@ -6,7 +6,7 @@ const dataResource = new DataResource();
 export const getViewSections = createSectionizer([
 	{
 		name: 'talkScript',
-		condition: (route:any) => route.viewType === 'talkScript',
+		condition: (route: any) => route.viewType === 'talkScript',
 	},
 	{
 		name: 'scenario',
@@ -35,7 +35,7 @@ export const openByResource = (navigationStore: any, { talkScript, scenarios }: 
 		routes.unshift(current);
 	}
 	routes.push.apply(routes, scenarios);
-	navigationStoreModule.setRoutes(routes);
+	navigationStoreModule.setRoutes(routes, false);
 };
 
 export const fromRoute = async ({ talkScriptId, stepEncoded }: any) => {

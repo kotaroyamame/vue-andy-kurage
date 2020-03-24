@@ -1,5 +1,5 @@
-import { PluginObject } from 'vue'
-import { Component, Prop, Vue as _Vue } from 'vue-property-decorator'
+import { PluginObject } from 'vue';
+import { Component, Prop, Vue as _Vue } from 'vue-property-decorator';
 import AndyKurageComp from './Wrapper.vue';
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';

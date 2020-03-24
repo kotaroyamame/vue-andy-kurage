@@ -59,14 +59,14 @@ class navigationStore extends VuexModule {
 		return navigationStoreModule.Index + relative;
 	}
 	@MutationAction({ mutate: ['routes', 'index'] })
-	setRoutes(routes: any): any {
+	setRoutes(routes: any, isEventEmit: boolean = true): any {
 		console.log(routes);
 		if (this.dataResource && this.dataResource.isEquals({ a: this.routes, b: routes })) {
 			console.log('cancel navigation routes update');
 			return;
 		}
 		const state: any = this.state;
-		if (state && state.eventHub && '$emit' in state.eventHub) {
+		if (state && state.eventHub && '$emit' in state.eventHub && isEventEmit) {
 			state.eventHub.$emit('changeRoute', { routes, index: routes.length - 2 });
 		}
 		return {
@@ -163,7 +163,7 @@ class navigationStore extends VuexModule {
 		return this.canMovePositionTo(this.index + relative);
 	}
 	canMovePositionTo(index: any) {
-		
+
 		return this.routes[index] != null;
 	}
 
