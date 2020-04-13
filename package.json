@@ -1,6 +1,6 @@
 {
   "name": "vue-andy-kurage",
-  "version": "0.1.53",
+  "version": "0.1.54",
   "private": false,
   "author": "Kotaro Andy,Ikeda",
   "scripts": {
@@ -41,7 +41,7 @@
     "@vue/cli-plugin-typescript": "^3.12.1",
     "@vue/cli-service": "^3.12.1",
     "node-sass": "^4.13.1",
-    "sass-loader": "^8.0.0",
+    "sass-loader": "^8.0.2",
     "typescript": "^3.8.3",
     "vue-template-compiler": "^2.6.11"
   },
