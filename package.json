@@ -28,7 +28,7 @@
     "core-js": "^3.6.4",
     "cross-env": "^6.0.3",
     "formstone": "^1.4.16-1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "vue": "^2.6.11",
     "vue-async-computed": "^3.8.2",
     "vue-class-component": "^7.2.3",
